@@ -5,5 +5,5 @@ from .models import Project
 class ProjectForm(ModelForm):
     class Meta:
         model = Project
-        fields = ('title', 'description', 'demoLink',
+        fields = ('title', 'description', 'image', 'demoLink',
                   'sourceLink', 'tags')
