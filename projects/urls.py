@@ -5,11 +5,11 @@ from . import views
 app_name = 'projects'
 
 urlpatterns = [
-    path('projects/', views.projects, name='projects'),
-    path('projects/<str:pk>/', views.project, name='project'),
+    path('', views.projects, name='projects'),
+    path('project/<str:pk>/', views.project, name='project'),
     path('project/create/', views.createProject, name='create_project'),
-    path('project/update/<int:pk>/',
+    path('project/update/<str:pk>/',
          views.updateProject, name='update_project'),
-    path('project/delete/<int:pk>/',
+    path('project/delete/<str:pk>/',
          views.deleteProject, name='delete_project'),
 ]
