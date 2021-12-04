@@ -76,4 +76,4 @@ def loginUser(request):
 def logoutUser(request):
     logout(request)
     messages.info(request, 'User was logged out!')
-    return redirect('users:logout')
+    return redirect('users:login')
