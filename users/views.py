@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Profile
+from .forms import CustomUserCreationForm
 
 
 def profiles(request):
@@ -21,7 +22,33 @@ def userProfile(request, pk):
     return render(request, 'users/user_profile.html', context)
 
 
+def registerUser(request):
+    page = 'register'
+    form = CustomUserCreationForm()
+
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+
+            messages.success(request, 'User account was created!')
+
+            login(request, user)
+            return redirect('users:edit_account')
+
+        else:
+            messages.success(
+                request, 'An error has occurred during registration!')
+
+    context = {'page': page, 'form': form}
+    return render(request, 'users/login_register.html', context)
+
+
 def loginUser(request):
+    page = 'login'
+
     if request.user.is_authenticated:
         return redirect('users:profiles')
     if request.method == "POST":
@@ -49,4 +76,4 @@ def loginUser(request):
 def logoutUser(request):
     logout(request)
     messages.info(request, 'User was logged out!')
-    return render(request, 'users/logout.html')
+    return redirect('users:logout')
