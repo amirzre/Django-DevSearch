@@ -7,21 +7,6 @@ from .models import Profile
 from .forms import CustomUserCreationForm
 
 
-def profiles(request):
-    profiles = Profile.objects.all()
-    context = {'profiles': profiles}
-    return render(request, 'users/profiles.html', context)
-
-
-def userProfile(request, pk):
-    profile = Profile.objects.get(id=pk)
-    topSkills = profile.skill_set.exclude(description__exact="")
-    otherSkills = profile.skill_set.filter(description="")
-    context = {'profile': profile,
-               'topSkills': topSkills, 'otherSkills': otherSkills}
-    return render(request, 'users/user_profile.html', context)
-
-
 def registerUser(request):
     page = 'register'
     form = CustomUserCreationForm()
@@ -65,7 +50,7 @@ def loginUser(request):
         if user is not None:
             login(request, user)
             return redirect(
-                request.GET['next'] if 'next' in request.GET else 'account')
+                request.GET['next'] if 'next' in request.GET else 'users:account')
 
         else:
             messages.error(request, 'Username OR password is incorrect!')
@@ -77,3 +62,27 @@ def logoutUser(request):
     logout(request)
     messages.info(request, 'User was logged out!')
     return redirect('users:login')
+
+
+def profiles(request):
+    profiles = Profile.objects.all()
+    context = {'profiles': profiles}
+    return render(request, 'users/profiles.html', context)
+
+
+def userProfile(request, pk):
+    profile = Profile.objects.get(id=pk)
+    topSkills = profile.skill_set.exclude(description__exact="")
+    otherSkills = profile.skill_set.filter(description="")
+    context = {'profile': profile,
+               'topSkills': topSkills, 'otherSkills': otherSkills}
+    return render(request, 'users/user_profile.html', context)
+
+
+@login_required(login_url="users:login")
+def userAccount(request):
+    profile = request.user.profile
+    skills = profile.skill_set.all()
+    projects = profile.project_set.all()
+    context = {'profile': profile, 'skills': skills, 'projects': projects}
+    return render(request, 'users/account.html', context)
