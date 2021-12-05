@@ -12,4 +12,7 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('account/', views.userAccount, name='account'),
     path('edit/', views.editAccount, name='edit_account'),
+    path('create/skill/', views.createSkill, name='create_skill'),
+    path('update/skill/<str:pk>/', views.updateSkill, name='update_skill'),
+    path('delete/skill/<str:pk>/', views.deleteSkill, name='delete_skill'),
 ]
