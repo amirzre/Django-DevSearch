@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ profile.name }}{% endblock title %} 
+{% block title %}{{ profile.name }}{% endblock title %}
 
 {%block content %}
 <!-- Main Section -->
@@ -28,7 +28,7 @@
                     ></a>
                 </li>
               {% endif %}
-              
+
               {% if profile.socialTwitter %}
                 <li>
                     <a title="Twitter" href="{{ profile.socialTwitter }}" target="_blank"
@@ -44,7 +44,7 @@
                     ></a>
                 </li>
               {% endif %}
-              
+
               {% if profile.socialWebsite %}
                 <li>
                     <a title="Personal Website" href="{{ profile.socialWebsite }}" target="_blank"
@@ -52,9 +52,11 @@
                     ></a>
                 </li>
               {% endif %}
-              
+
             </ul>
-            <a href="#" class="btn btn--sub btn--lg">Send Message </a>
+            {% if request.user.profile.id != profile.id %}
+              <a href="{% url 'users:create_message' profile.id %}" class="btn btn--sub btn--lg">Send Message </a>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -76,7 +78,7 @@
                     </p>
                 </div>
             {% endfor %}
-            
+
             <h3 class="devInfo__subtitle">Other Skills</h3>
             <div class="devInfo__otherSkills">
               {% for skill in otherSkills %}
