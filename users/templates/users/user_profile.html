@@ -12,7 +12,7 @@
           <div class="card__body dev">
             <img
               class="avatar avatar--xl"
-              src="{{ profile.image.url }}"
+              src="{{ profile.imageUrl }}"
             />
             <h2 class="dev__name">{{ profile.name }}</h2>
             <p class="dev__title">
@@ -98,7 +98,7 @@
                   <a href="{% url 'projects:project' project.id %}" class="project">
                     <img
                       class="project__thumbnail"
-                      src="{{ project.image.url }}"
+                      src="{{ project.imageUrl }}"
                       alt="project thumbnail"
                     />
                     <div class="card__body">

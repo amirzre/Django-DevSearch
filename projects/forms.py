@@ -7,7 +7,7 @@ class ProjectForm(ModelForm):
     class Meta:
         model = Project
         fields = ('title', 'description', 'image', 'demoLink',
-                  'sourceLink', 'tags')
+                  'sourceLink')
         widgets = {
             'tags': forms.CheckboxSelectMultiple()
         }

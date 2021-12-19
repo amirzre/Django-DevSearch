@@ -5,7 +5,7 @@ from users.models import Profile
 
 class Project(models.Model):
     owner = models.ForeignKey(
-        Profile, on_delete=models.SET_NULL, null=True, blank=True)
+        Profile, on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
     image = models.ImageField(
@@ -24,6 +24,14 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def imageUrl(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
 
     @property
     def reviewers(self):

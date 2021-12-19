@@ -11,7 +11,7 @@
         <div class="card text-center">
           <div class="card__body dev">
             <a class="tag tag--pill tag--main settings__btn" href="{% url 'users:edit_account' %}"><i class="im im-edit"></i> Edit</a>
-            <img class="avatar avatar--xl dev__avatar" src="{{ profile.image.url }}" />
+            <img class="avatar avatar--xl dev__avatar" src="{{ profile.imageUrl }}" />
             <h2 class="dev__name">{{ profile.name }}</h2>
             <p class="dev__title">{{ profile.shortIntro }}</p>
             <p class="dev__location">Based in {{ profile.location }}</p>
@@ -90,7 +90,7 @@
           {% for project in projects %}
             <tr>
               <td class="settings__thumbnail">
-                <a href="{% url 'projects:project' project.id %}"><img src="{{ project.image.url }}" alt="{{ porject.title }}" /></a>
+                <a href="{% url 'projects:project' project.id %}"><img src="{{ project.imageUrl }}" alt="{{ porject.title }}" /></a>
               </td>
               <td class="settings__tableInfo">
                 <a href="{% url 'projects:project' project.id %}">{{ project.title }}</a>
