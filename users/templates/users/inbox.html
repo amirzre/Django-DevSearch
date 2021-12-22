@@ -10,9 +10,9 @@
     <ul class="messages">
       {% for message in messageRequests %}
         {% if message.isRead == False %}
-          <li class="message message--unread">
-        {% else %}
-          <li class="message">
+        <li class="message message--unread">{% else %}</li>
+
+        <li class="message">
         {% endif %}
           <a href="{% url 'users:view_message' message.id %}">
             <span class="message__author">{{ message.name }}</span>

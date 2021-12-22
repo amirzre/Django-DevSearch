@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Reset Password{% endblock title %}
+{% block title %}Reset Password{%endblock title %}
 
 {% block content %}
 <div class="auth">
@@ -11,16 +11,17 @@
         <img src="{% static 'images/icon.svg' %}" alt="icon" />
       </a>
       <h3>Enter New Password</h3>
-      <p>Please enter your new password twice so we can verify you typed it in correctly.</p>
+      <p>
+        Please enter your new password twice so we can verify you typed it in
+        correctly.
+      </p>
     </div>
 
-    <form action="#" class="form auth__form" method="post">
+    <form action="" class="form auth__form" method="post">
       {% csrf_token %}
-
       <!-- Input:Email -->
-      <div class="form__field">
-        {{ form.as_p }}
-      </div>
+      <div class="form__field">{{ form.as_p }}</div>
+    </form>
   </div>
 </div>
 {% endblock content %}
